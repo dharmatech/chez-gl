@@ -2797,7 +2797,8 @@
   (define-function void glLighti (int int int))
 
   ;; void glLightfv( GLenum light, GLenum pname, const GLfloat *params )
-  (define-function void glLightfv (int int void*))
+  ;; (define-function void glLightfv (int int void*))
+  (define-function void glLightfv (int int u8*))
 
   ;; void glLightiv( GLenum light, GLenum pname, const GLint *params )
   (define-function void glLightiv (int int void*))
@@ -2827,7 +2828,8 @@
   (define-function void glMateriali (int int int))
 
   ;; void glMaterialfv( GLenum face, GLenum pname, const GLfloat *params )
-  (define-function void glMaterialfv (int int void*))
+  ;; (define-function void glMaterialfv (int int void*))
+  (define-function void glMaterialfv (int int u8*))
 
   ;; void glMaterialiv( GLenum face, GLenum pname, const GLint *params )
   (define-function void glMaterialiv (int int void*))
@@ -2877,13 +2879,15 @@
   (define-function void glGetPixelMapusv (int void*))
 
   ;; void glBitmap( GLsizei width, GLsizei height, GLfloat xorig, GLfloat yorig, GLfloat xmove, GLfloat ymove, const GLubyte *bitmap )
-  (define-function void glBitmap (int int float float float float void*))
+  ;; (define-function void glBitmap (int int float float float float void*))
+  (define-function void glBitmap (int int float float float float u8*))
 
   ;; void glReadPixels( GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *pixels )
   (define-function void glReadPixels (int int int int int int void*))
 
   ;; void glDrawPixels( GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels )
-  (define-function void glDrawPixels (int int int int void*))
+  ;; (define-function void glDrawPixels (int int int int void*))
+  (define-function void glDrawPixels (int int int int u8*))
 
   ;; void glCopyPixels( GLint x, GLint y, GLsizei width, GLsizei height, GLenum type )
   (define-function void glCopyPixels (int int int int int))
