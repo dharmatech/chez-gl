@@ -2981,7 +2981,8 @@
   (define-function void glTexImage1D (int int int int int int int void*))
 
   ;; void glTexImage2D( GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels )
-  (define-function void glTexImage2D (int int int int int int int int void*))
+  ;; (define-function void glTexImage2D (int int int int int int int int void*))
+  (define-function void glTexImage2D (int int int int int int int int u8*))
 
   ;; void glGetTexImage( GLenum target, GLint level, GLenum format, GLenum type, GLvoid *pixels )
   (define-function void glGetTexImage (int int int int void*))
@@ -2989,7 +2990,8 @@
   ;;;; 1.1 functions
 
   ;; void glGenTextures( GLsizei n, GLuint *textures )
-  (define-function void glGenTextures (int void*))
+  ;; (define-function void glGenTextures (int void*))
+  (define-function void glGenTextures (int u32*))
 
   ;; void glDeleteTextures( GLsizei n, const GLuint *textures)
   (define-function void glDeleteTextures (int void*))
