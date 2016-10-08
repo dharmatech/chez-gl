@@ -286,7 +286,7 @@
     (syntax-rules (callback)
       ((_ ret name ((callback c-ret c-params)))
        (define name
-         (let ((f (foreign-procedure (symbol->string 'name) (int) ret)))
+         (let ((f (foreign-procedure (symbol->string 'name) (void*) ret)))
            (lambda (proc)
              (let ((code (foreign-callable proc c-params c-ret)))
                (lock-object code)
