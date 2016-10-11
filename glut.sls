@@ -175,24 +175,27 @@
           glutEnterGameMode
           glutLeaveGameMode
           glutGameModeGet)
-  
+
   (import (chezscheme))
 
-  ;; (define libGLUT
-  ;;   (cond (on-darwin  (load-shared-object "GLUT.framework/GLUT"))
-  ;;         (on-windows (load-shared-object "glut32.dll"))
-  ;;         (on-linux   (load-shared-object "libglut.so.3"))
-  ;;         (on-freebsd (load-shared-object "libglut.so"))
-  ;;         (on-openbsd (begin
-  ;;                       (load-shared-object "libXmu.so.10.0")
-  ;;                       (load-shared-object "libGLU.so.7.0")
-  ;;                       (load-shared-object "libglut.so.3.7")))
-  ;;         (else
-  ;;          (assertion-violation
-  ;;           #f
-  ;;           "can not locate GLUT library, unknown operating system"))))
+  (define lib-name
+     (case (machine-type)
+        ((i3osx ti3osx)    "GLUT.framework/GLUT")  ; OSX x86
+        ((a6osx ta6osx)    "GLUT.framework/GLUT")  ; OSX x86_64
+        ((i3nt ti3nt)      "glut32.dll")           ; Windows x86
+        ((a6nt ta6nt)      "glut64.dll")           ; Windows x86_64
+        ((i3le ti3le)      "libglut.so.3")         ; Linux x86
+        ((a6le ta6le)      "libglut.so.3")         ; Linux x86_64
+        ((i3ob ti3ob)      "libglut.so.3.7")       ; OpenBSD x86
+        ((a6ob ta6ob)      "libglut.so.3.7")       ; OpenBSD x86_64
+        ((i3fb ti3fb)      "libGL.so")             ; FreeBSD x86
+        ((a6fb ta6fb)      "libGL.so")             ; FreeBSD x86_64
+        ((i3s2 ti3s2)      "libGL.so.1")           ; Solaris x86
+        ((a6s2 ta6s2)      "libGL.so.1")           ; Solaris x86_64
+           (else
+            (assertion-violation #f "can not locate GLUT library, unknown operating system"))))
 
-  (define no-op (load-shared-object "libglut.so.3"))
+  (define lib (load-shared-object lib-name))
 
   ;; Display mode bit masks.
   (define GLUT_RGB                0)

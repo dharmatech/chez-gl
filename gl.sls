@@ -1236,22 +1236,27 @@
           glMultiTexCoord4ivARB
           glMultiTexCoord4sARB
           glMultiTexCoord4svARB)
-  
+
   (import (chezscheme))
 
-  ;; (define lib-name
-  ;;   (cond (on-darwin  "OpenGL.framework/OpenGL")
-  ;;         (on-windows "opengl32.dll")
-  ;;         (on-linux   "libGL.so.1")
-  ;;         (on-freebsd "libGL.so")
-  ;;         (on-openbsd "libGL.so.7.3")
-  ;;         (on-sunos   "libGL.so.1")
-  ;;         (else
-  ;;          (assertion-violation #f "can not locate OpenGL library, unknown operating system"))))
+  (define lib-name
+     (case (machine-type)
+        ((i3osx ti3osx)    "OpenGL.framework/OpenGL")  ; OSX x86
+        ((a6osx ta6osx)    "OpenGL.framework/OpenGL")  ; OSX x86_64
+        ((i3nt ti3nt)      "opengl32.dll")             ; Windows x86
+        ((a6nt ta6nt)      "opengl64.dll")             ; Windows x86_64
+        ((i3le ti3le)      "libGL.so.1")               ; Linux x86
+        ((a6le ta6le)      "libGL.so.1")               ; Linux x86_64
+        ((i3ob ti3ob)      "libGL.so.7.3")             ; OpenBSD x86
+        ((a6ob ta6ob)      "libGL.so.7.3")             ; OpenBSD x86_64
+        ((i3fb ti3fb)      "libGL.so")                 ; FreeBSD x86
+        ((a6fb ta6fb)      "libGL.so")                 ; FreeBSD x86_64
+        ((i3s2 ti3s2)      "libGL.so.1")               ; Solaris x86
+        ((a6s2 ta6s2)      "libGL.so.1")               ; Solaris x86_64
+           (else
+            (assertion-violation #f "can not locate OpenGL library, unknown operating system"))))
 
-  ;; (define lib (load-shared-object lib-name))
-
-  (define no-op (load-shared-object "libGL.so.1"))
+  (define lib (load-shared-object lib-name))
 
   ;;;; Boolean values
   (define GL_FALSE #x0)
